@@ -1,0 +1,10 @@
+name: lab1
+title:
+username:
+account: cdcgraphs
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 777281
+bundleId: 1926533
+url: https://cdcgraphs.shinyapps.io/lab1/
+when: 1552086020.9502
