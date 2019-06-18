@@ -1,0 +1,23 @@
+docker run --hostname=quickstart.cloudera --privileged=true -t -i -v //c/Users/abhis/dic587:/src --publish-all=true -p 8888 cloudera/quickstart /usr/bin/docker-quickstart
+
+hadoop fs -mkdir /user/abhave
+hadoop fs -mkdir /user/abhave/MR
+hadoop fs -mkdir /user/abhave/MR/input
+cd /src/data/
+
+hadoop fs -put trialtwitter.txt /user/abhave/MR/input
+cd ..
+hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming-2.6.0-cdh5.7.0.jar \
+-file /src/mapper.py -mapper /src/mapper.py \
+-file /src/reducer.py -reducer /src/reducer.py \
+-input /user/abhave/MR/input/trialtwitter.txt -output /user/abhave/MR/output
+
+hadoop fs -cat /user/abhave/MR/output/part*
+
+hadoop fs –get /user/abhave/MR/output/ /src/
+
+
+
+hdfs dfs -rm /user/abhave/MR/output
+
+hadoop fs -rmdir /user/abhave/MR/output
